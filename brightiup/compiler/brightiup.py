@@ -21,7 +21,8 @@ def t_STATE(t):
     return t
 
 def t_STATENAME(t):
-    r'[a-zA-Z][a_zA-Z0-9_]*'
+    # r'[a-zA-Z][a_zA-Z0-9_]*'
+    r'[a-zA-Z0-9_]+'
     logger.info('Parsing token state "%s".'%t.value)
     return t
 
@@ -53,8 +54,10 @@ def t_newline(t):
     t.lexer.lineno += new_line_count
 
 lexer = lex.lex()
-lexer.input(open('../script/http.bt').read())
-while True:
-    tok = lexer.token()
-    if not tok: break
-    print tok
+
+if __name__ == '__main__':
+    lexer.input(open('../script/http.bt').read())
+    while True:
+        tok = lexer.token()
+        if not tok: break
+        logger.debug('%s'%tok)

@@ -3,6 +3,31 @@ state start {
 
 }
 
+state http_transaction_start {
+
+}
+
+state http_request_start {
+
+}
+
+state http_request_end {
+
+}
+
+state http_response_start {
+
+} 
+
+state http_response_end {
+
+}
+
+state http_transaction_end {
+
+}
+
 state end {
     
 }
+
