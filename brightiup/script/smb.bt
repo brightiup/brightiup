@@ -1,0 +1,34 @@
+
+state start {
+
+}
+
+state smb_transaction_start {
+
+}
+
+state smb_request_start {
+
+}
+
+state smb_request_end {
+
+}
+
+state smb_response_start {
+
+} 
+
+state smb_response_end {
+
+}
+
+state smb_transaction_end {
+
+}
+
+state end {
+    
+}
+
+
