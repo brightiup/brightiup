@@ -5,7 +5,7 @@ class BTLexerException(Exception):
         self.message = message
 
     def __str__(self):
-        return 'BTLexerException: %s'%self.message
+        return self.message
 
 class BTLexer(object):
     """
@@ -16,14 +16,19 @@ class BTLexer(object):
         "state",
     ]
 
-    tokens = [keyword.upper() for keyword in keywords] + ['ID']
+    tokens = [keyword.upper() for keyword in keywords] + [
+                            'ID',
+                            'VARIABLE',
+                        ]
     t_ignore = " \t"
-    literals = ".{}"
+    t_VARIABLE = r'''\$[A-Za-z][A-Za-z0-9_]*'''
+
+    literals = ".{};="
     
     _keyword_map = {}
     for keyword in keywords:
         _keyword_map[keyword] = keyword.upper()
-    
+
 
     @staticmethod
     def t_NEWLINE(t):
