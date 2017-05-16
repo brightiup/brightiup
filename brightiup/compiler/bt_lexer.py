@@ -10,7 +10,7 @@ class BTLexerException(Exception):
 class BTLexer(object):
     """BT lexer"""
     keywords = [
-        "import",
+        # "import",
         "state",
     ]
 

@@ -31,32 +31,47 @@ class BTParser(object):
         """
         state : STATE ID '{' expressions '}'
         """
-        print p[1], p[2], p[3]
+        print 'p_state', p[1], p[2], p[3], p[4], p[5]
+        p[0] = 'hhhh'
 
+
+    # @staticmethod
+    # def p_expressions(p):
+        # """
+        # expressions : expressions expression
+        # """
+        # print 'p_expressions', p[1]
 
     @staticmethod
-    def p_expressions(p):
+    def p_expressions_single(p):
         """
         expressions : expression
-                    | empty
         """
-        print p[1]
+        print 'p_expressions_single', p[1]
+        p[0] = 'hhhhh'
+
 
     @staticmethod
     def p_expression(p):
-        """expression : assign"""
-        print p[1]
+        """
+        expression : assign
+                   | empty
+        """
+        print 'p_expression', p[1]
+        p[0] = 'hhhhh'
 
+    
     @staticmethod 
     def p_assign(p):
-        """assign : VARIABLE ID '=' ID ';'"""
-        print p[1], p[2], p[3], p[4]
+        """assign : VARIABLE '=' ID ';'"""
+        print 'p_assign', p[1], p[2], p[3], p[4]
+        p[0] = 'hhhhh'
 
 
     @staticmethod
     def p_empty(p):
         """empty : """
-        pass
+        print 'empty'
 
     def parse(self, file_name):
         self.parser.parse(open(file_name).read())

@@ -5,9 +5,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = "IMPORT STATE ID VARIABLE\n        state : STATE ID '{' expressions '}'\n        \n        expressions : expression\n                    | empty\n        expression : assignassign : VARIABLE ID '=' ID ';'empty : "
+_lr_signature = "STATE ID VARIABLE\n        state : STATE ID '{' expressions '}'\n        \n        expressions : expression\n        \n        expression : assign\n                   | empty\n        assign : VARIABLE '=' ID ';'empty : "
     
-_lr_action_items = {'=':([11,],[12,]),'STATE':([0,],[1,]),';':([13,],[14,]),'VARIABLE':([4,],[7,]),'{':([3,],[4,]),'}':([4,5,6,8,9,14,],[-6,-4,10,-2,-3,-5,]),'ID':([1,7,12,],[3,11,13,]),'$end':([2,10,],[0,-1,]),}
+_lr_action_items = {'=':([7,],[11,]),'STATE':([0,],[1,]),';':([12,],[13,]),'VARIABLE':([4,],[7,]),'{':([3,],[4,]),'}':([4,5,6,8,9,13,],[-6,-3,10,-2,-4,-5,]),'ID':([1,11,],[3,12,]),'$end':([2,10,],[0,-1,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -27,9 +27,9 @@ del _lr_goto_items
 _lr_productions = [
   ("S' -> state","S'",1,None,None,None),
   ('state -> STATE ID { expressions }','state',5,'p_state','bt_parser.py',31),
-  ('expressions -> expression','expressions',1,'p_expressions','bt_parser.py',39),
-  ('expressions -> empty','expressions',1,'p_expressions','bt_parser.py',40),
-  ('expression -> assign','expression',1,'p_expression','bt_parser.py',46),
-  ('assign -> VARIABLE ID = ID ;','assign',5,'p_assign','bt_parser.py',51),
-  ('empty -> <empty>','empty',0,'p_empty','bt_parser.py',57),
+  ('expressions -> expression','expressions',1,'p_expressions_single','bt_parser.py',46),
+  ('expression -> assign','expression',1,'p_expression','bt_parser.py',54),
+  ('expression -> empty','expression',1,'p_expression','bt_parser.py',55),
+  ('assign -> VARIABLE = ID ;','assign',4,'p_assign','bt_parser.py',62),
+  ('empty -> <empty>','empty',0,'p_empty','bt_parser.py',68),
 ]
