@@ -8,9 +8,7 @@ class BTLexerException(Exception):
         return self.message
 
 class BTLexer(object):
-    """
-        BT lexer
-    """
+    """BT lexer"""
     keywords = [
         "import",
         "state",
