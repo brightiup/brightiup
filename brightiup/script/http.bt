@@ -1,13 +1,13 @@
 
-state start {
-
-}
-
 state http_transaction_start {
     $method = GET;
 }
 
 state http_request_start {
+
+}
+
+state start {
 
 }
 

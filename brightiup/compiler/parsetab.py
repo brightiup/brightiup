@@ -5,9 +5,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = "STATE ID VARIABLE\n        state : STATE ID '{' expressions '}'\n        \n        expressions : expression\n        \n        expression : assign\n                   | empty\n        assign : VARIABLE '=' ID ';'empty : "
+_lr_signature = "decoderSTATE ID VARIABLEdecoder : state\n        state : STATE ID '{' expressions '}'\n        \n        expressions : expressions expression\n        \n        expressions : expression\n        \n        expressions : empty\n        \n        expression : assign\n                   | empty\n        assign : VARIABLE '=' ID ';'empty : "
     
-_lr_action_items = {'=':([7,],[11,]),'STATE':([0,],[1,]),';':([12,],[13,]),'VARIABLE':([4,],[7,]),'{':([3,],[4,]),'}':([4,5,6,8,9,13,],[-6,-3,10,-2,-4,-5,]),'ID':([1,11,],[3,12,]),'$end':([2,10,],[0,-1,]),}
+_lr_action_items = {'=':([8,],[14,]),'STATE':([0,],[1,]),';':([15,],[16,]),'VARIABLE':([5,6,7,9,10,12,13,16,],[8,-6,8,-4,-5,-3,-7,-8,]),'{':([4,],[5,]),'}':([5,6,7,9,10,12,13,16,],[-9,-6,11,-4,-5,-3,-7,-8,]),'ID':([1,14,],[4,15,]),'$end':([2,3,11,],[-1,0,-2,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -16,7 +16,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'state':([0,],[2,]),'expression':([4,],[8,]),'expressions':([4,],[6,]),'empty':([4,],[9,]),'assign':([4,],[5,]),}
+_lr_goto_items = {'state':([0,],[2,]),'decoder':([0,],[3,]),'expressions':([5,],[7,]),'expression':([5,7,],[9,12,]),'assign':([5,7,],[6,6,]),'empty':([5,7,],[10,13,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -25,11 +25,14 @@ for _k, _v in _lr_goto_items.items():
        _lr_goto[_x][_k] = _y
 del _lr_goto_items
 _lr_productions = [
-  ("S' -> state","S'",1,None,None,None),
-  ('state -> STATE ID { expressions }','state',5,'p_state','bt_parser.py',31),
-  ('expressions -> expression','expressions',1,'p_expressions_single','bt_parser.py',46),
-  ('expression -> assign','expression',1,'p_expression','bt_parser.py',54),
-  ('expression -> empty','expression',1,'p_expression','bt_parser.py',55),
-  ('assign -> VARIABLE = ID ;','assign',4,'p_assign','bt_parser.py',62),
-  ('empty -> <empty>','empty',0,'p_empty','bt_parser.py',68),
+  ("S' -> decoder","S'",1,None,None,None),
+  ('decoder -> state','decoder',1,'p_decoder','bt_parser.py',30),
+  ('state -> STATE ID { expressions }','state',5,'p_state','bt_parser.py',37),
+  ('expressions -> expressions expression','expressions',2,'p_expressions','bt_parser.py',46),
+  ('expressions -> expression','expressions',1,'p_expressions_single','bt_parser.py',55),
+  ('expressions -> empty','expressions',1,'p_expressions_empty','bt_parser.py',63),
+  ('expression -> assign','expression',1,'p_expression','bt_parser.py',70),
+  ('expression -> empty','expression',1,'p_expression','bt_parser.py',71),
+  ('assign -> VARIABLE = ID ;','assign',4,'p_assign','bt_parser.py',80),
+  ('empty -> <empty>','empty',0,'p_empty','bt_parser.py',87),
 ]
