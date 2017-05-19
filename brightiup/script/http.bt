@@ -1,33 +1,41 @@
 
 state http_transaction_start {
     $method = GET;
+    $method = POST;
 }
 
 state http_request_start {
+    $method = GET;
 
 }
 
 state start {
+    $method = GET;
 
 }
 
 state http_request_end {
+    $method = GET;
 
 }
 
 state http_response_start {
+    $method = GET;
 
 } 
 
 state http_response_end {
+    $method = GET;
 
 }
 
 state http_transaction_end {
+    $method = GET;
 
 }
 
 state end {
+    $method = GET;
     
 }
 

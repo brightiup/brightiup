@@ -1,4 +1,6 @@
 state http_transaction_start {
     $method = GET;
     $method = GET;
+    $method = GET;
 }
+
