@@ -16,14 +16,12 @@ class BTParserException(Exception):
 
 class BTParser(object):
     """BT parser"""
-
     def __init__(self, **kwargs):
         self.lexer = BTLexer(**kwargs)
         self.tokens = self.lexer.tokens
         # kwargs['debug'] = True
         # kwargs['write_tables'] = True
         self.parser = yacc.yacc(module=self, start='decoder', **kwargs)
-        
 
     @staticmethod
     def p_error(p):
@@ -46,15 +44,21 @@ class BTParser(object):
     @staticmethod
     def p_states_single(p):
         """states : state"""
-        p[0] = p[1]
+        p[0] = [p[1]]
 
     @staticmethod
     def p_state(p):
         """
         state : STATE ID '{' expressions '}'
         """
-        p[0] = [ast.BTASTState(p[1], p[4])]
+        p[0] = ast.BTASTState(p[1], p[4])
 
+    @staticmethod
+    def p_expressions_empty(p):
+        """
+        expressions : empty
+        """
+        print 'p_expressions_empty'
 
     @staticmethod
     def p_expressions(p):
@@ -69,43 +73,38 @@ class BTParser(object):
         """
         expressions : expression 
         """
-        if p[1] is not None:
-            p[0] = p[1]
-
-    # @staticmethod
-    # def p_expressions_empty(p):
-        # """
-        # expressions : empty
-        # """
-        # print 'p_expressions_empty'
+        # if p[1] is not None:
+        p[0] = [p[1]]
 
     @staticmethod
     def p_expression(p):
         """
         expression : assign
         """
-        p[0] = [p[1]]
-
+        p[0] = p[1]
     
     @staticmethod 
     def p_assign(p):
         """assign : VARIABLE '=' ID ';'"""
         p[0] = ast.BTASTAssign(p[1], p[3])
 
+    @staticmethod
+    def p_empty(p):
+        """empty : """
+        p[0] = None
 
-    # @staticmethod
-    # def p_empty(p):
-        # """empty : """
-        # p[0] = None
+    precedence = (
+        # ('left', 'empty'),
+        # ('left', 'expressions'),
+    )
 
     def parse(self, file_name):
         decoder = self.parser.parse(open(file_name).read())
         states = decoder.states
-        print states
-        # for state in states:
-            # expressions = state.expressions
-            # for expression in expressions:
-                # print expression
+        for state in states:
+            expressions = state.expressions
+            for expression in expressions:
+                print expression
 
 
 
