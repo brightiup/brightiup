@@ -19,8 +19,8 @@ class BTParser(object):
     def __init__(self, **kwargs):
         self.lexer = BTLexer(**kwargs)
         self.tokens = self.lexer.tokens
-        # kwargs['debug'] = True
-        # kwargs['write_tables'] = True
+        kwargs['debug'] = True
+        kwargs['write_tables'] = True
         self.parser = yacc.yacc(module=self, start='decoder', **kwargs)
 
     @staticmethod
@@ -53,12 +53,6 @@ class BTParser(object):
         """
         p[0] = ast.BTASTState(p[1], p[4])
 
-    @staticmethod
-    def p_expressions_empty(p):
-        """
-        expressions : empty
-        """
-        print 'p_expressions_empty'
 
     @staticmethod
     def p_expressions(p):
@@ -69,12 +63,21 @@ class BTParser(object):
         p[0].append(p[2])
 
     @staticmethod
+    def p_expressions_empty(p):
+        """
+        expressions : empty
+        """
+        # p[0] = p[1]
+        # p[0].append(p[2])
+        p[0] = []
+
+    @staticmethod
     def p_expressions_single(p):
         """
         expressions : expression 
         """
-        # if p[1] is not None:
         p[0] = [p[1]]
+
 
     @staticmethod
     def p_expression(p):
@@ -111,4 +114,3 @@ class BTParser(object):
 if __name__ == '__main__':
     parser = BTParser()
     parser.parse('../script/http.bt')
-    # parser.parse('./test.bt')
